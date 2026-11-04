@@ -136,6 +136,46 @@ class FakeMixxx:
         return (group, key, payload, msg)
 
 
+class LiveMixxxSender(FakeMixxx):
+    """FakeMixxx + real CoreMIDI output: every command also goes to Mixxx.
+
+    Opens the virtual source `port_name` (visible in Mixxx Preferences →
+    Controllers once the bridge mapping is enabled). Falls back to
+    record-only if CoreMIDI is unavailable (non-macOS / no permission).
+    """
+
+    def __init__(self, port_name: str = "LaunchpadMK2Bridge"):
+        super().__init__()
+        self.port_name = port_name
+        self.port = None
+        self.midi_error = None
+        try:
+            from .coremidi_bridge import VirtualMidiPort
+            self.port = VirtualMidiPort(port_name)
+        except Exception as e:  # noqa: BLE001 — hardware/env dependent
+            self.midi_error = str(e)
+
+    @property
+    def live(self) -> bool:
+        return self.port is not None
+
+    def send(self, action: LogicalAction):
+        result = super().send(action)
+        if self.port is not None:
+            _kind, num, val = result[3]
+            if _kind == "note":
+                vel = 127 if (action.value01 is None or action.value01 > 0) else 0
+                if action.kind == "button":
+                    # press + release pair = one Mixxx trigger
+                    self.port.send_note(0, num, 127)
+                    self.port.send_note(0, num, 0)
+                else:
+                    self.port.send_note(0, num, vel)
+            else:
+                self.port.send_cc(0, num, val)
+        return result
+
+
 def generate_mixxx_xml() -> str:
     """Build the Mixxx 2.5 XML mapping for the bridge vocabulary."""
     lines = ['<?xml version="1.0" encoding="utf-8"?>',

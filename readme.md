@@ -14,8 +14,15 @@ Launchpad MK2 as two CDJ-style decks + mixer + FX.
 
 ```bash
 pip install -r requirements.txt
-python3 -m pytest tests/ -q          # 12 passed
+python3 -m pytest tests/ -q          # 16 passed
 PYTHONPATH=src python3 simulator.py  # scripted A07 DJ transition on fakes
+```
+
+No Launchpad? Run the on-screen emulator — it drives Mixxx while Mixxx is
+open, no hardware needed (see `docs/EMULATOR.md`):
+
+```bash
+PYTHONPATH=src python3 main.py --emulator
 ```
 
 Live use needs the MK2 + `mido`/`python-rtmidi`: see `docs/SETUP.md`,

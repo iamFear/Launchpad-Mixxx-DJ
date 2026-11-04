@@ -1,4 +1,6 @@
 pytest>=8
-# Optional live-MIDI backends (macOS CoreMIDI). Tests + simulator run without them.
-mido>=1.3
-python-rtmidi>=1.5
+# macOS only: foreground activation for the emulator window + window checks.
+pyobjc-framework-Cocoa>=11; sys_platform == "darwin"
+pyobjc-framework-Quartz>=11; sys_platform == "darwin"
+# NOTE: no MIDI driver packages needed — the bridge uses macOS CoreMIDI
+# directly via ctypes (src/launchpad_mixxx/coremidi_bridge.py).
