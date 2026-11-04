@@ -1,0 +1,38 @@
+[
+  {
+    "id": "intro",
+    "text": "Turn one Launchpad into a complete DJ setup. Launchpad Mixxx DJ brings two decks, mixing, and effects to a single pad grid.",
+    "seconds": 8.463666666666667,
+    "frames": 287
+  },
+  {
+    "id": "decks",
+    "text": "Start in User Two. Deck A is on the left, Deck B on the right. Load and play the first track. Then load, cue, sync, and play the second.",
+    "seconds": 8.988958333333333,
+    "frames": 303
+  },
+  {
+    "id": "controls",
+    "text": "The colors explain the controls. Hold green to increase, red to decrease. Yellow triggers one action, or resets a knob to center. Release a pad to stop the change.",
+    "seconds": 10.263666666666667,
+    "frames": 341
+  },
+  {
+    "id": "transition",
+    "text": "Ready to mix? Hold the crossfader increase pad to move from Deck A toward Deck B. A full sweep takes about two seconds.",
+    "seconds": 6.93825,
+    "frames": 242
+  },
+  {
+    "id": "mixer",
+    "text": "Switch to User One for the mixer and effects. Adjust channel levels, enable an effect, and raise the effects mix. Switching profiles preserves your control values.",
+    "seconds": 10.149958333333334,
+    "frames": 338
+  },
+  {
+    "id": "outro",
+    "text": "No Launchpad? Use the on-screen emulator with Mixxx. The bridge sends MIDI commands while Mixxx handles the audio. Your full DJ workflow, on one grid.",
+    "seconds": 9.956333333333333,
+    "frames": 332
+  }
+]

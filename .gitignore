@@ -3,3 +3,6 @@ __pycache__/
 .venv/
 dist/
 build/
+.DS_Store
+demo-video/node_modules/
+demo-video/out/

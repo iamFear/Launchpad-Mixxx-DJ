@@ -1,0 +1,519 @@
+{
+  "decks": [
+    {
+      "row": 0,
+      "col": 0,
+      "control": "deckA.load",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[Channel1]",
+      "key": "LoadSelectedTrack"
+    },
+    {
+      "row": 0,
+      "col": 1,
+      "control": "deckA.play",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[Channel1]",
+      "key": "play"
+    },
+    {
+      "row": 0,
+      "col": 2,
+      "control": "deckA.cue",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[Channel1]",
+      "key": "cue_default"
+    },
+    {
+      "row": 0,
+      "col": 3,
+      "control": "deckA.sync",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[Channel1]",
+      "key": "beatsync"
+    },
+    {
+      "row": 1,
+      "col": 0,
+      "control": "deckA.gain",
+      "role": "dec",
+      "color": "red",
+      "group": "[Channel1]",
+      "key": "pregain"
+    },
+    {
+      "row": 1,
+      "col": 1,
+      "control": "deckA.gain",
+      "role": "reset",
+      "color": "yellow",
+      "group": "[Channel1]",
+      "key": "pregain"
+    },
+    {
+      "row": 1,
+      "col": 2,
+      "control": "deckA.gain",
+      "role": "inc",
+      "color": "green",
+      "group": "[Channel1]",
+      "key": "pregain"
+    },
+    {
+      "row": 2,
+      "col": 0,
+      "control": "deckA.rate",
+      "role": "dec",
+      "color": "red",
+      "group": "[Channel1]",
+      "key": "rate"
+    },
+    {
+      "row": 2,
+      "col": 1,
+      "control": "deckA.rate",
+      "role": "reset",
+      "color": "yellow",
+      "group": "[Channel1]",
+      "key": "rate"
+    },
+    {
+      "row": 2,
+      "col": 2,
+      "control": "deckA.rate",
+      "role": "inc",
+      "color": "green",
+      "group": "[Channel1]",
+      "key": "rate"
+    },
+    {
+      "row": 3,
+      "col": 0,
+      "control": "deckA.filter",
+      "role": "dec",
+      "color": "red",
+      "group": "[Channel1]",
+      "key": "filterHigh"
+    },
+    {
+      "row": 3,
+      "col": 1,
+      "control": "deckA.filter",
+      "role": "reset",
+      "color": "yellow",
+      "group": "[Channel1]",
+      "key": "filterHigh"
+    },
+    {
+      "row": 3,
+      "col": 2,
+      "control": "deckA.filter",
+      "role": "inc",
+      "color": "green",
+      "group": "[Channel1]",
+      "key": "filterHigh"
+    },
+    {
+      "row": 4,
+      "col": 1,
+      "control": "deckA.pfl",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[Channel1]",
+      "key": "pfl"
+    },
+    {
+      "row": 0,
+      "col": 4,
+      "control": "deckB.load",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[Channel2]",
+      "key": "LoadSelectedTrack"
+    },
+    {
+      "row": 0,
+      "col": 5,
+      "control": "deckB.play",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[Channel2]",
+      "key": "play"
+    },
+    {
+      "row": 0,
+      "col": 6,
+      "control": "deckB.cue",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[Channel2]",
+      "key": "cue_default"
+    },
+    {
+      "row": 0,
+      "col": 7,
+      "control": "deckB.sync",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[Channel2]",
+      "key": "beatsync"
+    },
+    {
+      "row": 1,
+      "col": 4,
+      "control": "deckB.gain",
+      "role": "dec",
+      "color": "red",
+      "group": "[Channel2]",
+      "key": "pregain"
+    },
+    {
+      "row": 1,
+      "col": 5,
+      "control": "deckB.gain",
+      "role": "reset",
+      "color": "yellow",
+      "group": "[Channel2]",
+      "key": "pregain"
+    },
+    {
+      "row": 1,
+      "col": 6,
+      "control": "deckB.gain",
+      "role": "inc",
+      "color": "green",
+      "group": "[Channel2]",
+      "key": "pregain"
+    },
+    {
+      "row": 2,
+      "col": 4,
+      "control": "deckB.rate",
+      "role": "dec",
+      "color": "red",
+      "group": "[Channel2]",
+      "key": "rate"
+    },
+    {
+      "row": 2,
+      "col": 5,
+      "control": "deckB.rate",
+      "role": "reset",
+      "color": "yellow",
+      "group": "[Channel2]",
+      "key": "rate"
+    },
+    {
+      "row": 2,
+      "col": 6,
+      "control": "deckB.rate",
+      "role": "inc",
+      "color": "green",
+      "group": "[Channel2]",
+      "key": "rate"
+    },
+    {
+      "row": 3,
+      "col": 4,
+      "control": "deckB.filter",
+      "role": "dec",
+      "color": "red",
+      "group": "[Channel2]",
+      "key": "filterHigh"
+    },
+    {
+      "row": 3,
+      "col": 5,
+      "control": "deckB.filter",
+      "role": "reset",
+      "color": "yellow",
+      "group": "[Channel2]",
+      "key": "filterHigh"
+    },
+    {
+      "row": 3,
+      "col": 6,
+      "control": "deckB.filter",
+      "role": "inc",
+      "color": "green",
+      "group": "[Channel2]",
+      "key": "filterHigh"
+    },
+    {
+      "row": 4,
+      "col": 5,
+      "control": "deckB.pfl",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[Channel2]",
+      "key": "pfl"
+    },
+    {
+      "row": 7,
+      "col": 3,
+      "control": "mixer.crossfader",
+      "role": "dec",
+      "color": "red",
+      "group": "[Master]",
+      "key": "crossfader"
+    },
+    {
+      "row": 7,
+      "col": 4,
+      "control": "mixer.crossfader",
+      "role": "inc",
+      "color": "green",
+      "group": "[Master]",
+      "key": "crossfader"
+    },
+    {
+      "row": 7,
+      "col": 0,
+      "control": "mixer.headmix",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[Master]",
+      "key": "headMix"
+    },
+    {
+      "row": 7,
+      "col": 6,
+      "control": "mixer.headcue",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[Master]",
+      "key": "headSplit"
+    }
+  ],
+  "mixer_fx": [
+    {
+      "row": 0,
+      "col": 0,
+      "control": "mixer.ch1",
+      "role": "dec",
+      "color": "red",
+      "group": "[Channel1]",
+      "key": "volume"
+    },
+    {
+      "row": 0,
+      "col": 1,
+      "control": "mixer.ch1",
+      "role": "inc",
+      "color": "green",
+      "group": "[Channel1]",
+      "key": "volume"
+    },
+    {
+      "row": 0,
+      "col": 3,
+      "control": "mixer.ch2",
+      "role": "dec",
+      "color": "red",
+      "group": "[Channel2]",
+      "key": "volume"
+    },
+    {
+      "row": 0,
+      "col": 4,
+      "control": "mixer.ch2",
+      "role": "inc",
+      "color": "green",
+      "group": "[Channel2]",
+      "key": "volume"
+    },
+    {
+      "row": 0,
+      "col": 6,
+      "control": "mixer.crossfader",
+      "role": "dec",
+      "color": "red",
+      "group": "[Master]",
+      "key": "crossfader"
+    },
+    {
+      "row": 0,
+      "col": 7,
+      "control": "mixer.crossfader",
+      "role": "inc",
+      "color": "green",
+      "group": "[Master]",
+      "key": "crossfader"
+    },
+    {
+      "row": 1,
+      "col": 0,
+      "control": "mixer.mute1",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[Channel1]",
+      "key": "mute"
+    },
+    {
+      "row": 1,
+      "col": 1,
+      "control": "mixer.mute2",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[Channel2]",
+      "key": "mute"
+    },
+    {
+      "row": 1,
+      "col": 3,
+      "control": "mixer.pfl1",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[Channel1]",
+      "key": "pfl"
+    },
+    {
+      "row": 1,
+      "col": 4,
+      "control": "mixer.pfl2",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[Channel2]",
+      "key": "pfl"
+    },
+    {
+      "row": 2,
+      "col": 0,
+      "control": "mixer.master",
+      "role": "dec",
+      "color": "red",
+      "group": "[Master]",
+      "key": "gain"
+    },
+    {
+      "row": 2,
+      "col": 1,
+      "control": "mixer.master",
+      "role": "reset",
+      "color": "yellow",
+      "group": "[Master]",
+      "key": "gain"
+    },
+    {
+      "row": 2,
+      "col": 2,
+      "control": "mixer.master",
+      "role": "inc",
+      "color": "green",
+      "group": "[Master]",
+      "key": "gain"
+    },
+    {
+      "row": 2,
+      "col": 4,
+      "control": "mixer.headmix",
+      "role": "dec",
+      "color": "red",
+      "group": "[Master]",
+      "key": "headMix"
+    },
+    {
+      "row": 2,
+      "col": 5,
+      "control": "mixer.headmix",
+      "role": "reset",
+      "color": "yellow",
+      "group": "[Master]",
+      "key": "headMix"
+    },
+    {
+      "row": 2,
+      "col": 6,
+      "control": "mixer.headmix",
+      "role": "inc",
+      "color": "green",
+      "group": "[Master]",
+      "key": "headMix"
+    },
+    {
+      "row": 4,
+      "col": 0,
+      "control": "fx.mix",
+      "role": "dec",
+      "color": "red",
+      "group": "[EffectRack1_EffectUnit1]",
+      "key": "mix"
+    },
+    {
+      "row": 4,
+      "col": 1,
+      "control": "fx.mix",
+      "role": "reset",
+      "color": "yellow",
+      "group": "[EffectRack1_EffectUnit1]",
+      "key": "mix"
+    },
+    {
+      "row": 4,
+      "col": 2,
+      "control": "fx.mix",
+      "role": "inc",
+      "color": "green",
+      "group": "[EffectRack1_EffectUnit1]",
+      "key": "mix"
+    },
+    {
+      "row": 4,
+      "col": 4,
+      "control": "fx.param",
+      "role": "dec",
+      "color": "red",
+      "group": "[EffectRack1_EffectUnit1_Effect1]",
+      "key": "parameter1"
+    },
+    {
+      "row": 4,
+      "col": 5,
+      "control": "fx.param",
+      "role": "reset",
+      "color": "yellow",
+      "group": "[EffectRack1_EffectUnit1_Effect1]",
+      "key": "parameter1"
+    },
+    {
+      "row": 4,
+      "col": 6,
+      "control": "fx.param",
+      "role": "inc",
+      "color": "green",
+      "group": "[EffectRack1_EffectUnit1_Effect1]",
+      "key": "parameter1"
+    },
+    {
+      "row": 6,
+      "col": 0,
+      "control": "fx.enable1",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[EffectRack1_EffectUnit1]",
+      "key": "enable"
+    },
+    {
+      "row": 6,
+      "col": 1,
+      "control": "fx.enableA",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[EffectRack1_EffectUnit1]",
+      "key": "group_[Channel1]_enable"
+    },
+    {
+      "row": 6,
+      "col": 2,
+      "control": "fx.enableB",
+      "role": "trigger",
+      "color": "yellow",
+      "group": "[EffectRack1_EffectUnit1]",
+      "key": "group_[Channel2]_enable"
+    }
+  ]
+}
