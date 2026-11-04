@@ -13,6 +13,9 @@ PYTHONPATH=src python3 main.py --emulator   # on-screen Launchpad → live Mixxx
 PYTHONPATH=src python3 simulator.py         # scripted two-track transition
 ```
 
+Or double-click **`dist/Launchpad-Mixxx-DJ.app`** (build it with
+`bash macos/build_app.sh`) — same emulator, no Terminal needed.
+
 Click LOAD → PLAY on Deck A, prep Deck B, hold crossfader ▲ ~2 s, flip to User 1 for mixer/FX. The emulator panel logs every command Mixxx receives.
 
 ## How it works

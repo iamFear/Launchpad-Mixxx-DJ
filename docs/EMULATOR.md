@@ -24,6 +24,7 @@ the emulator runs, start step 2 first, then open Preferences.)
 ```bash
 PYTHONPATH=src python3 main.py --emulator
 ```
+(or double-click `dist/Launchpad-Mixxx-DJ.app` after `bash macos/build_app.sh`)
 
 You get an 8×8 pad grid plus Session / User 1 / User 2 / Mixer buttons.
 Click-and-hold pads exactly like hardware:
