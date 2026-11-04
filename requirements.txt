@@ -1,0 +1,4 @@
+pytest>=8
+# Optional live-MIDI backends (macOS CoreMIDI). Tests + simulator run without them.
+mido>=1.3
+python-rtmidi>=1.5
