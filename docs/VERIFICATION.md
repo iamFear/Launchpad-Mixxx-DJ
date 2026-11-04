@@ -1,6 +1,6 @@
 # Verification record
 
-Run: `python3 -m pytest tests/ -q` → **12 passed** (commit `dev` HEAD at
+Run: `python3 -m pytest tests/ -q` → **16 passed** (commit `dev` HEAD at
 build time). Simulator: `PYTHONPATH=src python3 simulator.py` → PASS.
 Fake-endpoint evidence is deterministic; every physical portion is
 **Blocked** (no MK2 / live Mixxx in this environment).
