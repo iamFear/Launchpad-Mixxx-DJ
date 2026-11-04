@@ -13,8 +13,12 @@ cat > "$APP/Contents/MacOS/Launchpad-Mixxx-DJ" <<EOF
 #!$PYTHON_BIN
 import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(__file__)), "Resources", "src"))
-from launchpad_mixxx.emulator import main
-main()
+if "--selftest" in sys.argv:
+    from launchpad_mixxx.emulator import run_selftest
+    print(run_selftest())
+else:
+    from launchpad_mixxx.emulator import main
+    main()
 EOF
 chmod +x "$APP/Contents/MacOS/Launchpad-Mixxx-DJ"
 

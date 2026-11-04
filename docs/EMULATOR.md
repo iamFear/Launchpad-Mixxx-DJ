@@ -37,7 +37,20 @@ Click-and-hold pads exactly like hardware:
   (`[Channel1] play 1.00`, …). The header confirms
   `MIDI live → Mixxx on 'LaunchpadMK2Bridge'`.
 
-## 3. Play the A07 set
+## 3. Self-check (optional but recommended)
+
+The bundle can verify itself — window, 64 pads, live MIDI port, a synthetic
+press, hold-repeats, and a profile switch — and writes the report to
+`/tmp/launchpad_selftest.json`:
+
+```bash
+open dist/Launchpad-Mixxx-DJ.app --args --selftest
+```
+
+Expect `"ok": true` (plus `window_viewable`, `midi_live`,
+`press_one_command`, `hold_ok`, `switch_ok` all true).
+
+## 4. Play the A07 set
 
 Load + start track A (User 2 → LOAD, PLAY), prepare B (LOAD, CUE, SYNC,
 PLAY), hold the crossfader ▲ pad ~2 s to mix over, press User 1 for

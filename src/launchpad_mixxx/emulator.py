@@ -52,13 +52,21 @@ class Emulator:
         self.root = root
         root.title("Launchpad MK2 Emulator → Mixxx")
         try:
+            dup = "LaunchpadMK2Bridge" in _visible_sources()
+        except Exception:  # noqa: BLE001
+            dup = False
+        try:
             sender: FakeMixxx = LiveMixxxSender()
         except Exception:  # noqa: BLE001
             sender = FakeMixxx()
         if isinstance(sender, LiveMixxxSender) and not sender.live:
             sender = FakeMixxx()
         self.sender = sender
-        self.app = DjApp(mixxx=sender)
+        self.app = DjApp(mixxx=sender, initial_values={
+            "deckA.gain": 80.0, "deckB.gain": 80.0,
+            "mixer.ch1": 100.0, "mixer.ch2": 0.0,
+            "mixer.crossfader": 0.0,
+        })
         self.t0 = now_ms()
         self.pad_btn: dict = {}
         self.top_btn: dict = {}
@@ -96,6 +104,8 @@ class Emulator:
         midi_txt = ("MIDI live → Mixxx on 'LaunchpadMK2Bridge'"
                     if getattr(sender, "live", False)
                     else "MIDI unavailable (record-only)")
+        if dup:
+            midi_txt += "  ⚠ ANOTHER INSTANCE ALREADY RUNNING"
         tk.Label(side, text=midi_txt, font=("Helvetica", 10)).pack(anchor="w")
         tk.Label(side, text="Mixxx commands:", font=("Helvetica", 10, "bold")).pack(anchor="w")
         self.log = tk.Listbox(side, width=44, height=24, font=("Menlo", 9))
@@ -164,6 +174,84 @@ class Emulator:
                 self.log.delete(0)
         if cmds:
             self.log.see(tk.END)
+
+
+def _visible_sources() -> list:
+    from .coremidi_bridge import list_sources
+    return list_sources()
+
+
+def run_selftest(out: str = "/tmp/launchpad_selftest.json") -> dict:
+    """Headless self-verification: window state + synthetic press/hold + MIDI.
+
+    Writes a JSON report to `out` and returns it. Used by
+    `open dist/Launchpad-Mixxx-DJ.app --args --selftest`.
+    """
+    import json
+    import time
+
+    from .mapping import PROFILES
+    res: dict = {"ok": False}
+    root = tk.Tk()
+    try:
+        emo = Emulator(root)
+        root.update()
+        time.sleep(1.0)
+        root.update()
+        res["window_viewable"] = bool(root.winfo_viewable())
+        res["geometry"] = root.winfo_geometry()
+        res["grid_buttons"] = sum(len(row) for row in emo.grid_btns)
+        res["midi_live"] = bool(getattr(emo.sender, "live", False))
+        res["profile"] = emo.app.router.active.value
+
+        from .mapping import ProfileId
+        from .protocol import grid_note_zero_based
+
+        def rc_of(pid, cid, role="trigger"):
+            note = next(x.pad for x in PROFILES[pid].bindings
+                        if x.control_id == cid and x.role == role)
+            return next((r, c) for r in range(8) for c in range(8)
+                        if grid_note_zero_based(r, c) == note)
+
+        D = ProfileId.DECKS
+        emo._press(*rc_of(D, "deckA.play"))
+        emo._release(*rc_of(D, "deckA.play"))
+        plays = [c for c in emo.sender.commands
+                 if c[0] == "[Channel1]" and c[1] == "play"]
+        res["press_one_command"] = len(plays) == 1
+
+        emo._press(*rc_of(D, "deckA.gain", "inc"))
+        for _ in range(4):
+            time.sleep(0.03)
+            root.update()
+        emo._release(*rc_of(D, "deckA.gain", "inc"))
+        gains = [c for c in emo.sender.commands
+                 if c[0] == "[Channel1]" and c[1] == "pregain"]
+        res["hold_repeat_commands"] = len(gains)
+        res["hold_ok"] = len(gains) >= 3
+
+        from . import protocol as P
+        emo._top(P.CC_USER1, True)
+        res["switch_ok"] = emo.app.router.active == ProfileId.MIXER_FX
+        res["ok"] = all([res["window_viewable"], res["midi_live"],
+                         res["press_one_command"], res["hold_ok"],
+                         res["switch_ok"], res["grid_buttons"] == 64])
+    except Exception as e:  # noqa: BLE001 — report, don't crash the harness
+        res["error"] = repr(e)
+    finally:
+        try:
+            port = getattr(emo.sender, "port", None) if "emo" in locals() else None
+            if port is not None:
+                port.close()
+        except Exception:  # noqa: BLE001
+            pass
+        try:
+            root.destroy()
+        except Exception:  # noqa: BLE001
+            pass
+    with open(out, "w") as f:
+        json.dump(res, f, indent=1)
+    return res
 
 
 def main():
