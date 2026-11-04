@@ -1,0 +1,6 @@
+pytest>=8
+# macOS only: foreground activation for the emulator window + window checks.
+pyobjc-framework-Cocoa>=11; sys_platform == "darwin"
+pyobjc-framework-Quartz>=11; sys_platform == "darwin"
+# NOTE: no MIDI driver packages needed — the bridge uses macOS CoreMIDI
+# directly via ctypes (src/launchpad_mixxx/coremidi_bridge.py).
