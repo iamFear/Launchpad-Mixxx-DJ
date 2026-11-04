@@ -74,7 +74,9 @@ class Emulator:
         top = tk.Frame(root)
         top.pack(pady=4)
         for name, cc in TOP_BUTTONS:
-            b = tk.Button(top, text=name, width=8, font=("Helvetica", 10, "bold"))
+            # Labels, not Buttons: macOS renders native buttons ignoring bg.
+            b = tk.Label(top, text=name, width=8, font=("Helvetica", 10, "bold"),
+                         relief="raised", borderwidth=2, bg="#e0e0e0")
             b.pack(side=tk.LEFT, padx=3)
             b.bind("<ButtonPress-1>", lambda e, c=cc: self._top(c, True))
             b.bind("<ButtonRelease-1>", lambda e, c=cc: self._top(c, False))
@@ -92,7 +94,12 @@ class Emulator:
         for r in range(8):
             row = []
             for c in range(8):
-                b = tk.Button(grid, text="", width=5, height=2, font=("Helvetica", 7))
+                # Labels, not Buttons: macOS renders native buttons
+                # ignoring bg, which hides the pad colours. Sunken relief
+                # while held gives extra tactile feedback on top of colour.
+                b = tk.Label(grid, text="", width=5, height=2,
+                             font=("Helvetica", 7), relief="raised",
+                             borderwidth=3, bg=COLORS[("off", "off")])
                 b.grid(row=r, column=c, padx=1, pady=1)
                 b.bind("<ButtonPress-1>", lambda e, r=r, c=c: self._press(r, c))
                 b.bind("<ButtonRelease-1>", lambda e, r=r, c=c: self._release(r, c))
@@ -151,11 +158,14 @@ class Emulator:
                 btn = self.grid_btns[r][c]
                 b = by_pad.get(note)
                 if b is None:
-                    btn.configure(text="", bg=COLORS[("off", "off")], fg=FG["off"])
+                    btn.configure(text="", bg=COLORS[("off", "off")],
+                                  fg=FG["off"], relief="flat")
                 else:
-                    bright = "bright" if note in held else "dim"
+                    is_held = note in held
+                    bright = "bright" if is_held else "dim"
                     btn.configure(text=pad_label(b),
-                                  bg=COLORS[(b.color, bright)], fg=FG[bright])
+                                  bg=COLORS[(b.color, bright)], fg=FG[bright],
+                                  relief="sunken" if is_held else "raised")
         active = self.app.router.active
         self.profile_var.set(f"Profile: {active.value}  "
                              f"({'decks: A left / B right' if active == ProfileId.DECKS else 'mixer + FX'})")
@@ -214,8 +224,10 @@ def run_selftest(out: str = "/tmp/launchpad_selftest.json") -> dict:
                         if grid_note_zero_based(r, c) == note)
 
         D = ProfileId.DECKS
-        emo._press(*rc_of(D, "deckA.play"))
-        emo._release(*rc_of(D, "deckA.play"))
+        prc = rc_of(D, "deckA.play")
+        emo._press(*prc)
+        res["held_relief_sunken"] = emo.grid_btns[prc[0]][prc[1]].cget("relief") == "sunken"
+        emo._release(*prc)
         plays = [c for c in emo.sender.commands
                  if c[0] == "[Channel1]" and c[1] == "play"]
         res["press_one_command"] = len(plays) == 1
@@ -235,7 +247,8 @@ def run_selftest(out: str = "/tmp/launchpad_selftest.json") -> dict:
         res["switch_ok"] = emo.app.router.active == ProfileId.MIXER_FX
         res["ok"] = all([res["window_viewable"], res["midi_live"],
                          res["press_one_command"], res["hold_ok"],
-                         res["switch_ok"], res["grid_buttons"] == 64])
+                         res["switch_ok"], res["grid_buttons"] == 64,
+                         res.get("held_relief_sunken", False)])
     except Exception as e:  # noqa: BLE001 — report, don't crash the harness
         res["error"] = repr(e)
     finally:
